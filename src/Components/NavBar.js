@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { filterProducts } from '../store/actions';
 
 axios.defaults.withCredentials = true;
 
@@ -9,6 +10,7 @@ const NavBar = (props) => {
 
   const searchTerm = useSelector(state => state.searchTerm)
   const cart = useSelector(state => state.cart.items)
+  const filteredProducts = useSelector(state => state.product.filteredItems)
 
   const dispatch = useDispatch()
 
@@ -20,6 +22,11 @@ const NavBar = (props) => {
   const handleLogout = () => {
     axios.post('http://localhost:3001/api/v1/logout')
   }
+
+  const handleClick = category => {
+    filterProducts(category)
+    console.log('navbar handleclick', filteredProducts)
+  };
 
   return (
     <div className="NavBar">
@@ -68,7 +75,7 @@ const NavBar = (props) => {
               <div className="NavCategory">All</div>
             </Link>
             <Link to={'/products/underwear'}>
-              <div className="NavCategory">Underwear</div>
+              <div className="NavCategory" onClick={() => handleClick("underwear")}>Underwear</div>
             </Link>
             <Link to={'/products/bras'}>
               <div className="NavCategory">Bras</div>

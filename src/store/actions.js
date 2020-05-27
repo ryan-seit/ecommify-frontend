@@ -1,7 +1,7 @@
 import { getProducts, getProduct } from '../api/Products';
 import { addToCart, getCart } from '../api/Cart';
 import * as types from './types';
-import Cart from '../Components/Cart';
+// import Cart from '../Components/Cart';
 
 // load all products
 export const loadProducts = () => dispatch => {
@@ -60,7 +60,11 @@ export const removeFromCart = item => {
 
 export const setCurrentUser = user => dispatch => {
   dispatch({ type: types.SET_CURRENT_USER, payload: user })
-}
+};
+
+export const filterProducts = category => dispatch => {
+  dispatch({ type: types.FILTER_PRODUCTS, payload: category })
+};
 
 // set state to signup user info
 // persist user to API

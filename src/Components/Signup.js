@@ -12,8 +12,8 @@ const validate = values => {
   if (!values.fullname) {
     errors.fullname = 'Required'
   }
-  if (!values.email) {
-    errors.email = 'Required'
+  if (!values.email || !isValidEmail(values.email)) {
+    errors.email = 'Invalid Email'
   }
   if (!values.password) {
     errors.password = 'Required'

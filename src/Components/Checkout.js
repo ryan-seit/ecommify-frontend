@@ -18,8 +18,8 @@ const createRenderer = render => ({ input, meta, label, ...rest }) => (
   // className changes to 'error' if not filled out, 'active' if field is active
   <div 
     className={[
-      meta.error && meta.touched ? 'error':'',
-      meta.active ? 'active':''
+      meta.error && meta.touched ? `checkout-form-input ${label} error`:`checkout-form-input ${label}`
+      // ,meta.active ? 'active':''
     ].join(' ')}
   >
     {/* <pre>
@@ -37,8 +37,8 @@ const createRenderer = render => ({ input, meta, label, ...rest }) => (
 )
 
 // Render text input
-const RenderInput = createRenderer((input, label) =>
-  <input {...input} placeholder={label}/>
+const RenderInput = createRenderer((input) =>
+  <input {...input} />
 )
 
 // Render drop-down list
@@ -50,28 +50,43 @@ const RenderSelect = createRenderer((input, { children }) =>
 const Checkout = ({ handleSubmit, submitting }) => {
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-          <Field label="Address" name="address" component={RenderInput} />
-          <Field label="Address" name="address" component={RenderInput} />
-          <Field label="City" name="city" component={RenderInput} />
-          <Field label="State" name="state" component={RenderSelect}>
-            <option />
-            {states.map(state => 
-              <option key={state} value={state}>
-                {state}
-              </option>
-            )}
-          </Field>
-          <Field label="Zip" name="zip" component={RenderInput} />
-        <button type="submit" disabled={submitting}>Submit</button>
-      </form>
+    <div className="checkout-form__title">Complete Purchase</div>
       <StripeProvider apiKey="pk_test_eP8gdLbaRffG5Oam0LjsbfIz00EvLKJHFU">
-        <div className="example">
+        <div className="checkout-form">
           <Elements>
             <CheckoutForm /* {orderId={this.props.initializedCart.id}} *//>
           </Elements>
         </div>
       </StripeProvider>
+    {/* <div className="checkout-form__title">Shipping</div>
+    <div className="checkout-form">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="login-form__input">
+          <Field label="Address" name="address" component={RenderInput} />
+        </div>
+        <div className="login-form__input">
+          <Field label="Apartment/P.O. Box" name="apartment" component={RenderInput} />
+        </div>
+        <div className="login-form__input">
+          <Field label="City" name="city" component={RenderInput} />
+        </div>
+        <div className="login-form__input">
+          <Field label="State" name="state" component={RenderSelect}>
+            <option>
+            {states.map(state => 
+              <option key={state} value={state}>
+                {state}
+              </option>
+            )}
+            </option>
+          </Field>
+        </div>
+        <div className="login-form__input">
+          <Field label="Zip" name="zip" component={RenderInput} />
+        </div>
+        <button type="submit" disabled={submitting}>Continue</button>
+      </form>
+    </div> */}
     </>
 
   )
