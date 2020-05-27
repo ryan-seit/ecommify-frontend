@@ -6,8 +6,16 @@ import ProductContainer from './ProductContainer';
 const FeatureContainer = ({products}) => {
 
   return (
-    <>
-      <Carousel autoPlay showArrows={true} showThumbs={false} showStatus={false} >
+    <div className="FeatureContainer">
+      <Carousel autoPlay 
+        showArrows={true} 
+        showThumbs={false} 
+        showStatus={false} 
+        infiniteLoop={true}
+        interval={3000}
+        transitionTime={500}
+        stopOnHover={false}
+      >
         <div>
           <img src="https://cdn.shopify.com/s/files/1/0204/2302/articles/Header_Chosen_Family_2048x.jpg?v=1574097835" alt="img_1"/>
         </div>
@@ -21,13 +29,16 @@ const FeatureContainer = ({products}) => {
           <img src="https://cdn.shopify.com/s/files/1/0204/2302/articles/UnisuitBlogHeader_6d0481be-c0b5-4fba-b3c7-e9fad5d44ea3_2048x.jpg?v=1583440179" alt="img_4" />
         </div>
         <div>
-          <img src="https://cdn.shopify.com/s/files/1/0204/2302/articles/0930_HALL_2048x.jpg?v=1569948116" alt="img_5" />
+          <img src="https://cdn.shopify.com/s/files/1/0204/2302/articles/TomboyXFirstLine_ChemicalFree_Blog_2048x.jpg?v=1582223946" alt="img_5" />
         </div>
+        <div>
+          <img src="https://cdn.shopify.com/s/files/1/0204/2302/articles/0930_HALL_2048x.jpg?v=1569948116" alt="img_6" />
+        </div>
+        
       </Carousel>
-      <ProductContainer products={products} />
-    </>
+      {/* <ProductContainer products={products} /> */}
+    </div>
   )
 }
 
 export default FeatureContainer;
-

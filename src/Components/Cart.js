@@ -1,9 +1,11 @@
 import React from 'react';
+// import axios from 'axios';
+// import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartLineItem from './CartLineItem';
 
 const Cart = ({ cart, subtotal }) => {
-  // console.log('cart props:', cart)
+  console.log('cart props:', cart)
 
   return (
     <>
@@ -16,7 +18,7 @@ const Cart = ({ cart, subtotal }) => {
         <div className="cart__bottom">
           <div className="cart__bottom-subtotal">Subtotal: ${subtotal}</div>
           
-          <Link className="cart__bottom-button" to="Checkout">Place Order</Link>
+          <Link className="cart__bottom-button" to="Checkout">Continue</Link>
         </div>
         
       </div>

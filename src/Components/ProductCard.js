@@ -2,14 +2,21 @@ import React from 'react';
 import { loadAddToCart } from '../store/actions';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
+axios.defaults.withCredentials = true;
 const ProductCard = ({ product }) => {
 
   const dispatch = useDispatch();
 
   const handleAddToCart = (product) => {
-    // console.log(item, "added to cart")
-    dispatch(loadAddToCart(product));
+    axios.post('http://localhost:3001/api/v1/line_items', {
+      product: product
+    })
+    .then(response => {
+      console.log("product_card", response)
+      dispatch(loadAddToCart(product));
+    })
   }
   
   return (

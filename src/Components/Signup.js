@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import isValidEmail from 'sane-email-validation';
 import { setCurrentUser } from '../store/actions';
 
@@ -12,8 +12,8 @@ const validate = values => {
   if (!values.fullname) {
     errors.fullname = 'Required'
   }
-  if (!values.email) {
-    errors.email = 'Required'
+  if (!values.email || !isValidEmail(values.email)) {
+    errors.email = 'Invalid Email'
   }
   if (!values.password) {
     errors.password = 'Required'
@@ -22,7 +22,7 @@ const validate = values => {
   }
   if (!values.password_confirmation) {
     errors.password_confirmation = 'Required'
-  } else if (values.password != values.password_confirmation) {
+  } else if (values.password !== values.password_confirmation) {
     errors.password_confirmation = 'Passwords must match'
   }
   return errors;
@@ -31,8 +31,8 @@ const validate = values => {
 const createRenderer = render => ({ input, meta, label, ...rest }) => (
   <div 
     className={[
-      meta.error && meta.touched ? 'error':'',
-      meta.active ? 'active':''
+      meta.error && meta.touched ? `login-form-input ${label} error`:`login-form-input ${label}`
+      // ,meta.active ? 'active':''
     ].join(' ')}
   >
   <label>{label}</label>
@@ -47,7 +47,7 @@ const createRenderer = render => ({ input, meta, label, ...rest }) => (
 );
 
 const renderInput = createRenderer((input, label) =>
-  <input {...input} placeholder={label} />
+  <input {...input} />
 );
 
 const Signup = ({ handleSubmit, submitting }) => {
@@ -69,20 +69,27 @@ const Signup = ({ handleSubmit, submitting }) => {
   
 
   return (
-    <div>
-      <h1>Sign Up</h1>
+    <>
+      <div className="signup-form__title">Sign Up</div>
+      <div className="signup-form">
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Field label="Full Name" name="fullname" component={renderInput} />
-        <Field label="Email" name="email" component={renderInput} />
-        <Field label="Password" name="password" component={renderInput} />
-        <Field label="Password Confirmation" name="password_confirmation" component={renderInput} />
-        <button type="submit" disabled={submitting}>Sign Up</button>
-        <br></br>
-        or
-        <Link to='/login'> Log In</Link>
-      </form>
-    </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="signup-form__input">
+            <Field label="Full Name" name="fullname" component={renderInput} />
+          </div>
+          <div className="signup-form__input">
+            <Field label="Email" name="email" component={renderInput} />
+          </div>
+          <div className="signup-form__input">
+            <Field label="Password" name="password" component={renderInput} />
+          </div>
+          <div className="signup-form__input">
+            <Field label="Password Confirmation" name="password_confirmation" component={renderInput} />
+          </div>
+          <button type="submit" disabled={submitting}>Sign Up</button>
+        </form>
+      </div>
+    </>
   );
 }
   
