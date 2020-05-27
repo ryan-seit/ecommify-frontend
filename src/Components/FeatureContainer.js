@@ -6,7 +6,7 @@ import ProductContainer from './ProductContainer';
 const FeatureContainer = ({products}) => {
 
   return (
-    <>
+    <div className="FeatureContainer">
       <Carousel autoPlay showArrows={true} showThumbs={false} showStatus={false} >
         <div>
           <img src="https://cdn.shopify.com/s/files/1/0204/2302/articles/Header_Chosen_Family_2048x.jpg?v=1574097835" alt="img_1"/>
@@ -25,7 +25,7 @@ const FeatureContainer = ({products}) => {
         </div>
       </Carousel>
       <ProductContainer products={products} />
-    </>
+    </div>
   )
 }
 

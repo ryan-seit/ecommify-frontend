@@ -18,7 +18,7 @@ const CartLineItem = ({ lineItem }) => {
         <div className="cartLineItem__detail__name">{item.name}</div>
         <div className="cartLineItem__detail__price">${item.price}</div>
       </div>
-        <div className="cartLineItem__remove" onClick={() => handleRemove(item)}><i class="fas fa-trash"></i></div>
+        <div className="cartLineItem__remove" onClick={() => handleRemove(item)}><i className="fas fa-trash"></i></div>
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import React from 'react';
+// import axios from 'axios';
+// import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartLineItem from './CartLineItem';
 
 const Cart = ({ cart, subtotal }) => {
-  // console.log('cart props:', cart)
+  console.log('cart props:', cart)
 
   return (
     <>

@@ -10,3 +10,7 @@ export const addToCart = (item) => {
     qty: item.qty
   })
 };
+
+export const getCart = () => {
+  return axios.get('/cart')
+};

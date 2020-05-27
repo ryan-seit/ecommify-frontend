@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 
-import { loadProducts } from '../store/actions';
 import NavBar from './NavBar';
 import Cart from './Cart';
 import Signup from './Signup';
@@ -14,7 +13,7 @@ import ProductContainer from './ProductContainer';
 import FooterContainer from './FooterContainer';
 import ProductPage from './ProductPage';
 import Checkout from './Checkout';
-import { setCurrentUser } from '../store/actions';
+import { setCurrentUser, loadProducts, loadCart } from '../store/actions';
 
 function App() {
 
@@ -33,8 +32,10 @@ function App() {
       return dispatch(setCurrentUser(response.data));
     })
   }
+
   useEffect(() => {
     dispatch(loadProducts());
+    dispatch(loadCart());
     handleSession();
   }, []);
 

@@ -25,14 +25,11 @@ const NavBar = (props) => {
     <div className="NavBar">
       
       <div className="NavTop">
-        <div className="Contact">
-          <i className="fas fa-phone-square"></i>
-          800-555-1212
-        </div>
+        
         
         <div className="NavTopR">
-          <div >
-            <form className="Search" onSubmit={handleFormSubmit}>
+          <div className="Search">
+            <form onSubmit={handleFormSubmit}>
               <input type="text" value={searchTerm}
                 onChange={e => dispatch({ type: "SET_SEARCHTERM", payload: e.target.value })}
               />
@@ -42,16 +39,18 @@ const NavBar = (props) => {
 
           {props.currentUser ? (
             <>
-              <div>{props.currentUser.email}</div>
+              <div className="nav__account">{props.currentUser.email}</div>
               <button onClick={handleLogout}>Logout</button>
             </>
           ) : (
             <>
               <Link to={'/login'}>
-                <button className="login">Login</button>
+                <button className="login-btn">Login</button>
+                {/* <i class="fas fa-sign-in-alt"><span> Login</span></i> */}
               </Link>
               <Link to={'/signup'}>
-                <button className="signup">Signup</button>
+                <button className="signup-btn">Signup</button>
+                {/* <i class="fas fa-user-plus"><span> Signup</span></i> */}
               </Link>
             </>
           )}
@@ -82,7 +81,8 @@ const NavBar = (props) => {
             </Link>
             <Link to={'/cart'}>
             {/* <button className="Cart">Cart</button> */}
-            <i className="fa">&#xf07a;</i>
+            {/* <i className="fa">&#xf07a;</i> */}
+            <i className="fas fa-shopping-cart"></i>
             <span className='badge badge-warning' id='lblCartCount'>{cart.length}</span>
           </Link>
           </div>

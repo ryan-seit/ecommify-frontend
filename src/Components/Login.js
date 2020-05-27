@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
@@ -12,14 +12,14 @@ axios.defaults.withCredentials = true;
 // validate that fields are populated
 const validate = v => {
   const errors = {}
-  if (!v.email) {
-    errors.email = 'Required'
+  if (!v.email || !isValidEmail(v.email)) {
+    errors.email = 'Invalid Email'
   }
   // use isValidEmail to ensure email format is valid
   if (!v.password) {
     errors.password = 'Required'
-  } else if (!isValidEmail(v.email)) {
-    errors.email = 'Invalid Email'
+  // } else if (!isValidEmail(v.email)) {
+  //   errors.email = 'Invalid Email'
   }
   // if (!v.state) {
     //   errors.state = 'Required'
@@ -31,8 +31,8 @@ const createRenderer = render => ({ input, meta, label, ...rest }) => (
   // className changes to 'error' if not filled out, 'active' if field is active
   <div 
     className={[
-      meta.error && meta.touched ? 'error':'',
-      meta.active ? 'active':''
+      meta.error && meta.touched ? `login-form-input ${label} error`:`login-form-input ${label}`
+      // ,meta.active ? `login-form-${label} active`:`${label}`
     ].join(' ')}
   >
     {/* <pre>
@@ -51,7 +51,7 @@ const createRenderer = render => ({ input, meta, label, ...rest }) => (
 
 // Render text input
 const renderInput = createRenderer((input, label) =>
-  <input {...input} placeholder={label}/>
+  <input {...input} />
 );
 
 // Render drop-down list
@@ -74,25 +74,30 @@ const Login = ({ handleSubmit, submitting }) => {
   
 
   return (
-    <div>
-      <h2>Log In</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Field label="Email" name="email" component={renderInput} />
-        <Field label="Password" name="password" component={renderInput} />
-        {/* <Field label="State" name="state" component={RenderSelect}>
-          <option />
-          {states.map(state => 
-            <option key={state} value={state}>
-              {state}
-            </option>
-          )}
-        </Field> */}
-        <button type="submit" disabled={submitting}>Log In</button>
-      </form>
-      <div>
-        or <Link to='/signup'>sign up</Link>
+    <>
+      <div className="login-form__title">Log In</div>
+      <div className="login-form">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="login-form__input">
+            <Field label="Email" name="email" component={renderInput} />
+          </div>
+          <div className="login-form__input">
+            <Field label="Password" name="password" component={renderInput} />
+          </div>
+          
+          
+          {/* <Field label="State" name="state" component={RenderSelect}>
+            <option />
+            {states.map(state => 
+              <option key={state} value={state}>
+                {state}
+              </option>
+            )}
+          </Field> */}
+          <button type="submit" disabled={submitting}>Log In</button>
+        </form>
       </div>
-    </div>
+    </>
   );
 };
 

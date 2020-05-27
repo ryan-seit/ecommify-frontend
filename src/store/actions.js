@@ -1,8 +1,9 @@
 import { getProducts, getProduct } from '../api/Products';
-import { addToCart } from '../api/Cart';
+import { addToCart, getCart } from '../api/Cart';
 import * as types from './types';
 import Cart from '../Components/Cart';
 
+// load all products
 export const loadProducts = () => dispatch => {
   // console.log('loadProducts')
   dispatch({ type: types.LOAD_PRODUCTS_LOADING });
@@ -14,6 +15,7 @@ export const loadProducts = () => dispatch => {
   )
 };
 
+// load single product
 export const loadProduct = product => dispatch => {
   // console.log('action loadProduct:', product)
   dispatch({ type: types.LOAD_PRODUCT_LOADING });
@@ -24,9 +26,22 @@ export const loadProduct = product => dispatch => {
   )
 };
 
+// add item to cart
 export const loadAddToCart = item => {
-  // console.log('actions loadAddToCart', item.data)
+  console.log('actions loadAddToCart', item)
   return { type: types.ADD_ITEM, payload: item }
+};
+
+// load cart items
+export const loadCart = () => dispatch => {
+  console.log('actions loadCart')
+  dispatch({ type: types.LOAD_CART_LOADING });
+  getCart()
+  .then(
+    // cartItemArray => console.log('loadCart', cartItemArray),
+    cartItemArray => dispatch({ type: types.LOAD_CART_SUCCESS, payload: cartItemArray.data }),
+    err => dispatch ({ type: types.LOAD_CART_ERROR, error: err.message })
+  )
 };
 
 // export const loadAddToCart = item => dispatch => {
