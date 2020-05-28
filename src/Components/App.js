@@ -13,6 +13,7 @@ import ProductContainer from './ProductContainer';
 import FooterContainer from './FooterContainer';
 import ProductPage from './ProductPage';
 import Checkout from './Checkout';
+import About from './About';
 import { setCurrentUser, loadProducts, loadCart } from '../store/actions';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Route exact path="/checkout" render={(routeProps) => <Checkout {...routeProps} cart={cart} subtotal={subtotal} />} />
           <Route exact path="/products/all" render={(routeProps) => <ProductContainer {...routeProps} products={products} />} />
           <Route path="/products/:id" render={(routeProps) => <ProductPage {...routeProps} />} />
+          <Route exact path="/about" render={(routeProps) => <About {...routeProps} />} />
         </Switch>
       </main>
       <FooterContainer />
