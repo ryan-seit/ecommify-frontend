@@ -1,16 +1,15 @@
 import React from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import ProductContainer from './ProductContainer';
 
-const FeatureContainer = ({products}) => {
+const FeatureContainer = () => {
 
   return (
     <div className="FeatureContainer">
       <Carousel autoPlay 
         showArrows={true} 
         showThumbs={false} 
-        showStatus={false} 
+        showStatus={false}
         infiniteLoop={true}
         interval={3000}
         transitionTime={500}
@@ -34,9 +33,7 @@ const FeatureContainer = ({products}) => {
         <div>
           <img src="https://cdn.shopify.com/s/files/1/0204/2302/articles/0930_HALL_2048x.jpg?v=1569948116" alt="img_6" />
         </div>
-        
       </Carousel>
-      {/* <ProductContainer products={products} /> */}
     </div>
   )
 }

@@ -436,6 +436,14 @@
   margin-bottom: 3%;
 }
 
+#map { 
+  /* border: 1px solid red; */
+  margin: auto;
+  margin-top: 12%;
+  width: 90em;
+  height: 70em; 
+}
+
 .ProductCard {
   /* border: 1px solid green;   */
   /* height: 20em; */
